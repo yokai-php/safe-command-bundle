@@ -47,11 +47,44 @@ yokai_safe_command:
     enabled: true
     commands:
         enabled: true
+        config:
+            enabled: true
+            commands:
+                - 'config:dump-reference'
         doctrine:
             enabled: true
             commands:
                 - 'doctrine:database:drop'
+                - 'doctrine:mapping:convert'
+                - 'doctrine:mapping:import'
                 - 'doctrine:schema:drop'
+                - 'doctrine:schema:validate'
+        debug:
+            enabled: true
+            commands:
+                - 'debug:config'
+                - 'debug:container'
+                - 'debug:event-dispatcher'
+                - 'debug:router'
+                - 'debug:swiftmailer'
+                - 'debug:translation'
+                - 'debug:twig'
+        lint:
+            enabled: true
+            commands:
+                - 'lint:twig'
+                - 'lint:yaml'
+        server:
+            enabled: true
+            commands:
+                - 'server:run'
+                - 'server:start'
+                - 'server:status'
+                - 'server:stop'
+        translation:
+            enabled: true
+            commands:
+                - 'translation:update'
         misc:
             enabled: true
             commands: {  }
