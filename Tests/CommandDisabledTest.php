@@ -48,13 +48,13 @@ class CommandDisabledTest extends CommandTestCase
             static::assertSame(
                 ConsoleCommandEvent::RETURN_CODE_DISABLED,
                 $exit,
-                'Running disabled command should return disabled return code.'
+                sprintf('Running disabled command "%s" should return disabled return code.', $command)
             );
 
             static::assertRegExp(
                 '/This command has been disabled. Aborting.../',
                 $output->fetch(),
-                'Disabled command should output message to tell it wont run.'
+                sprintf('Disabled command "%s" should output message to tell it wont run.', $command)
             );
         }
     }

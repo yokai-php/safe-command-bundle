@@ -27,7 +27,12 @@ class Configuration implements ConfigurationInterface
                     ->canBeDisabled()
                     ->addDefaultsIfNotSet()
                     ->children()
+                        ->append($this->createCommandsNode('config'))
                         ->append($this->createCommandsNode('doctrine'))
+                        ->append($this->createCommandsNode('debug'))
+                        ->append($this->createCommandsNode('lint'))
+                        ->append($this->createCommandsNode('server'))
+                        ->append($this->createCommandsNode('translation'))
                         ->append($this->createCommandsNode('misc'))
                     ->end()
                 ->end()
@@ -70,9 +75,37 @@ class Configuration implements ConfigurationInterface
         $node = (new TreeBuilder())->root($name);
 
         $map = [
+            'config' => [
+                'config:dump-reference',
+            ],
             'doctrine' => [
                 'doctrine:database:drop',
+                'doctrine:mapping:convert',
+                'doctrine:mapping:import',
                 'doctrine:schema:drop',
+                'doctrine:schema:validate',
+            ],
+            'debug' => [
+                'debug:config',
+                'debug:container',
+                'debug:event-dispatcher',
+                'debug:router',
+                'debug:swiftmailer',
+                'debug:translation',
+                'debug:twig',
+            ],
+            'lint' => [
+                'lint:twig',
+                'lint:yaml',
+            ],
+            'server' => [
+                'server:run',
+                'server:start',
+                'server:status',
+                'server:stop',
+            ],
+            'translation' => [
+                'translation:update',
             ],
         ];
 
