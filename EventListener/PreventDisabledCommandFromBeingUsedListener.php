@@ -47,7 +47,11 @@ class PreventDisabledCommandFromBeingUsedListener implements EventSubscriberInte
             // hide disabled commands from the list
             foreach ($event->getCommand()->getApplication()->all() as $command) {
                 if (in_array($command->getName(), $this->commands)) {
-                    $command->setHidden(true);
+                    if (method_exists($command, 'setHidden')) {
+                        $command->setHidden(true);
+                    } elseif (method_exists($command, 'setPublic')) {
+                        $command->setPublic(false);
+                    }
                 }
             }
         // if the command is one of the disabled commands
