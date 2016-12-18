@@ -4,6 +4,7 @@ YokaiSafeCommandBundle
 [![Build Status](https://api.travis-ci.org/yokai-php/safe-command-bundle.png?branch=master)](https://travis-ci.org/yokai-php/safe-command-bundle)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/yokai-php/safe-command-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/yokai-php/safe-command-bundle/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/yokai-php/safe-command-bundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/yokai-php/safe-command-bundle/?branch=master)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/9fa4fc24-ccc1-427e-aa97-9350b23a61b8/mini.png)](https://insight.sensiolabs.com/projects/9fa4fc24-ccc1-427e-aa97-9350b23a61b8)
 
 
 Did you find yourself ashamed, running command in the wrong environment ?
