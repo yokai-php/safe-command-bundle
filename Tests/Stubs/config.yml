@@ -1,0 +1,9 @@
+framework:
+    test: true
+    secret: test
+
+yokai_safe_command:
+    environments:
+        enabled: true
+        environments:
+            - test

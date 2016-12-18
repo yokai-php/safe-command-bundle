@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="yokai_safe_command.event_listener.prevent_disabled_command_from_being_used_listener"
+                 class="Yokai\SafeCommandBundle\EventListener\PreventDisabledCommandFromBeingUsedListener">
+            <argument>%yokai_app_keeper.disabled_commands%</argument>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="yokai_safe_command.event_listener.prevent_command_from_being_used_with_disabled_environment_listener"
+                 class="Yokai\SafeCommandBundle\EventListener\PreventCommandFromBeingUsedWithDisabledEnvironmentListener">
+            <argument>%yokai_app_keeper.disabled_commands%</argument>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+    </services>
+
+</container>
