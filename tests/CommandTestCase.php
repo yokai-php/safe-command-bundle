@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yokai\SafeCommandBundle\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
@@ -7,18 +9,12 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 abstract class CommandTestCase extends KernelTestCase
 {
-    /**
-     * @inheritDoc
-     */
-    protected function setUp()
+    protected function setUp(): void
     {
         static::bootKernel();
     }
 
-    /**
-     * @return Application
-     */
-    protected static function createApplication()
+    protected static function createApplication(): Application
     {
         $application = new Application(static::$kernel);
         $application->setAutoExit(false);

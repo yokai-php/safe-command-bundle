@@ -8,13 +8,13 @@
 
         <service id="yokai_safe_command.event_listener.prevent_disabled_command_from_being_used_listener"
                  class="Yokai\SafeCommandBundle\EventListener\PreventDisabledCommandFromBeingUsedListener">
-            <argument>%yokai_app_keeper.disabled_commands%</argument>
+            <argument>%yokai_safe_command.disabled_commands%</argument>
             <tag name="kernel.event_subscriber"/>
         </service>
 
         <service id="yokai_safe_command.event_listener.prevent_command_from_being_used_with_disabled_environment_listener"
                  class="Yokai\SafeCommandBundle\EventListener\PreventCommandFromBeingUsedWithDisabledEnvironmentListener">
-            <argument>%yokai_app_keeper.disabled_commands%</argument>
+            <argument>%yokai_safe_command.disabled_commands%</argument>
             <tag name="kernel.event_subscriber"/>
         </service>
 

@@ -1,8 +1,8 @@
 framework:
     test: true
     secret: test
-    router:
-        resource: "%kernel.root_dir%/routing.yml"
+#    router:
+#        resource: "%kernel.project_dir%/routing.yml"
 
 yokai_safe_command:
     environments:
