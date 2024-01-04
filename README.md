@@ -36,64 +36,40 @@ composer require yokai/safe-command-bundle
 
 return [
     // ...
-    Yokai\SafeCommandBundle\YokaiSafeCommandBundle::class => ['all' => true],
+    Yokai\SafeCommandBundle\YokaiSafeCommandBundle::class => ['prod' => true],
 ];
 ```
 
+> [!NOTE]
+> The bundle is enabled only for `prod` here, but you are free to do whatever you want.
+
 ### Configuration
 
+The bundle comes with few some commands disabled by default (from Symfony's standards), but
+
+you can override commands that came from the standard:
 ```
 # config/packages/yokai_safe_command.yaml
-yokai_safe_command:
-    enabled: true
-    commands:
-        enabled: true
-        config:
-            enabled: true
-            commands:
-                - 'config:dump-reference'
-        doctrine:
-            enabled: true
-            commands:
-                - 'doctrine:database:drop'
-                - 'doctrine:mapping:convert'
-                - 'doctrine:mapping:import'
-                - 'doctrine:schema:drop'
-                - 'doctrine:schema:validate'
-        debug:
-            enabled: true
-            commands:
-                - 'debug:config'
-                - 'debug:container'
-                - 'debug:event-dispatcher'
-                - 'debug:router'
-                - 'debug:swiftmailer'
-                - 'debug:translation'
-                - 'debug:twig'
-        lint:
-            enabled: true
-            commands:
-                - 'lint:twig'
-                - 'lint:yaml'
-        server:
-            enabled: true
-            commands:
-                - 'server:run'
-                - 'server:start'
-                - 'server:status'
-                - 'server:stop'
-        translation:
-            enabled: true
-            commands:
-                - 'translation:update'
-        misc:
-            enabled: true
-            commands: {  }
-    environments:
-        enabled: false
-        environments:
-            - prod
+when@prod:
+    yokai_safe_command:
+        standard: []
 ```
+
+you add your own commands:
+```
+# config/packages/yokai_safe_command.yaml
+when@prod:
+    yokai_safe_command:
+        custom:
+          - 'vendor:my:dev-command'
+          - 'app:my:dev-command'
+```
+
+> [!NOTE]
+> "standard" disabled commands are viewable via the command:
+> ```
+> bin/console config:dump-reference yokai_safe_command
+> ```
 
 
 ## License

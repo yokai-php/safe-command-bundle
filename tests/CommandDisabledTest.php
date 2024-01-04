@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Yokai\SafeCommandBundle\Tests;
 
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Event\ConsoleCommandEvent;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\BufferedOutput;
+use Symfony\Component\Console\Output\NullOutput;
 
 final class CommandDisabledTest extends CommandTestCase
 {
@@ -18,6 +20,8 @@ final class CommandDisabledTest extends CommandTestCase
         self::createApplication()->run(new StringInput('list'), $output = new BufferedOutput());
 
         $out = $output->fetch();
+
+        self::assertMatchesRegularExpression('/cache:clear/', $out, 'Some commands are still viewable.');
 
         foreach (self::commands() as [$command]) {
             self::assertDoesNotMatchRegularExpression(
@@ -49,6 +53,18 @@ final class CommandDisabledTest extends CommandTestCase
             $output->fetch(),
             sprintf('Disabled command "%s" should output message to tell it wont run.', $command)
         );
+    }
+
+    /**
+     * @test
+     */
+    public function enabled_command_should_run(): void
+    {
+        $application = self::createApplication();
+
+        $exit = $application->run(new StringInput('cache:clear'), new NullOutput());
+
+        self::assertSame(Command::SUCCESS, $exit, 'Some commands are still runnable');
     }
 
     public static function commands(): \Generator
