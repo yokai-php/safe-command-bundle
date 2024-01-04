@@ -1,21 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yokai\SafeCommandBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-class YokaiSafeCommandExtension extends Extension
+final class YokaiSafeCommandExtension extends Extension
 {
-    /**
-     * @inheritdoc
-     */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = $this->getConfiguration($configs, $container);
         $config = $this->processConfiguration($configuration, $configs);
@@ -24,18 +23,14 @@ class YokaiSafeCommandExtension extends Extension
             return;
         }
 
-        $loader = new Loader\XmlFileLoader($container, new FileLocator(dirname(__DIR__).'/Resources/config'));
+        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__ . '/../../config'));
         $loader->load('services.xml');
 
         $this->defineDisabledCommands($config['commands'], $container);
         $this->defineAllowedEnvironments($config['environments'], $container);
     }
 
-    /**
-     * @param array            $config
-     * @param ContainerBuilder $container
-     */
-    private function defineDisabledCommands(array $config, ContainerBuilder $container)
+    private function defineDisabledCommands(array $config, ContainerBuilder $container): void
     {
         if (!$config['enabled']) {
             $container->removeDefinition(
@@ -47,8 +42,8 @@ class YokaiSafeCommandExtension extends Extension
 
         // collect commands over config sections
         $commands = [];
-        foreach ($config as $name => $value) {
-            if (!is_array($value)) {
+        foreach ($config as $value) {
+            if (!\is_array($value)) {
                 continue;
             }
             if (!isset($value['enabled']) || !$value['enabled']) {
@@ -66,14 +61,10 @@ class YokaiSafeCommandExtension extends Extension
         sort($commands);
 
         // set disabled commands parameter
-        $container->setParameter('yokai_app_keeper.disabled_commands', $commands);
+        $container->setParameter('yokai_safe_command.disabled_commands', $commands);
     }
 
-    /**
-     * @param array            $config
-     * @param ContainerBuilder $container
-     */
-    private function defineAllowedEnvironments(array $config, ContainerBuilder $container)
+    private function defineAllowedEnvironments(array $config, ContainerBuilder $container): void
     {
         if (!$config['enabled']) {
             $container->removeDefinition(
@@ -84,6 +75,6 @@ class YokaiSafeCommandExtension extends Extension
         }
 
         // set allowed environments parameter
-        $container->setParameter('yokai_app_keeper.allowed_environments', $config['environments']);
+        $container->setParameter('yokai_safe_command.allowed_environments', $config['environments']);
     }
 }

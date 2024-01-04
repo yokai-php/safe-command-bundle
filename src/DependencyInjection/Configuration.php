@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yokai\SafeCommandBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\NodeDefinition;
@@ -9,15 +11,12 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-class Configuration implements ConfigurationInterface
+final class Configuration implements ConfigurationInterface
 {
-    /**
-     * @inheritdoc
-     */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
-        $tree = new TreeBuilder();
-        $root = $tree->root('yokai_safe_command');
+        $tree = new TreeBuilder('yokai_safe_command');
+        $root = $tree->getRootNode();
 
         $root
             ->canBeDisabled()
@@ -43,12 +42,9 @@ class Configuration implements ConfigurationInterface
         return $tree;
     }
 
-    /**
-     * @return NodeDefinition
-     */
-    private function createEnvironmentsNode()
+    private function createEnvironmentsNode(): NodeDefinition
     {
-        $node = (new TreeBuilder())->root('environments');
+        $node = (new TreeBuilder('environments'))->getRootNode();
 
         $node
             ->canBeEnabled()
@@ -65,14 +61,9 @@ class Configuration implements ConfigurationInterface
         return $node;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return NodeDefinition
-     */
-    private function createCommandsNode($name)
+    private function createCommandsNode(string $name): NodeDefinition
     {
-        $node = (new TreeBuilder())->root($name);
+        $node = (new TreeBuilder($name))->getRootNode();
 
         $map = [
             'config' => [
@@ -86,40 +77,42 @@ class Configuration implements ConfigurationInterface
                 'doctrine:schema:validate',
             ],
             'debug' => [
+                'debug:autowiring',
                 'debug:config',
                 'debug:container',
+                'debug:dotenv',
                 'debug:event-dispatcher',
+                'debug:firewall',
+                'debug:form',
                 'debug:router',
-                'debug:swiftmailer',
+                'debug:serializer',
                 'debug:translation',
                 'debug:twig',
+                'debug:validator',
             ],
             'lint' => [
+                'lint:container',
                 'lint:twig',
+                'lint:xliff',
                 'lint:yaml',
             ],
             'server' => [
-                'server:run',
-                'server:start',
-                'server:status',
-                'server:stop',
+                'server:dump',
+                'server:log',
             ],
             'translation' => [
-                'translation:update',
+                'translation:extract',
+                'translation:pull',
+                'translation:push',
             ],
         ];
-
-        $defaults = [];
-        if (isset($map[$name])) {
-            $defaults = $map[$name];
-        }
 
         $node
             ->canBeDisabled()
             ->addDefaultsIfNotSet()
             ->children()
                 ->arrayNode('commands')
-                    ->defaultValue($defaults)
+                    ->defaultValue($map[$name] ?? [])
                     ->useAttributeAsKey('name')
                     ->prototype('scalar')->end()
                 ->end()

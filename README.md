@@ -1,10 +1,14 @@
-YokaiSafeCommandBundle
-======================
+# YokaiSafeCommandBundle
 
-[![Build Status](https://api.travis-ci.org/yokai-php/safe-command-bundle.png?branch=master)](https://travis-ci.org/yokai-php/safe-command-bundle)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/yokai-php/safe-command-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/yokai-php/safe-command-bundle/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/yokai-php/safe-command-bundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/yokai-php/safe-command-bundle/?branch=master)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/9fa4fc24-ccc1-427e-aa97-9350b23a61b8/mini.png)](https://insight.sensiolabs.com/projects/9fa4fc24-ccc1-427e-aa97-9350b23a61b8)
+[![Tests](https://img.shields.io/github/actions/workflow/status/yokai-php/safe-command-bundle/tests.yml?branch=main&style=flat-square&label=tests)](https://github.com/yokai-php/safe-command-bundle/actions)
+[![Coverage](https://img.shields.io/codecov/c/github/yokai-php/safe-command-bundle?style=flat-square)](https://codecov.io/gh/yokai-php/safe-command-bundle)
+[![Contributors](https://img.shields.io/github/contributors/yokai-php/safe-command-bundle?style=flat-square)](https://github.com/yokai-php/safe-command-bundle/graphs/contributors)
+
+[![License](https://img.shields.io/packagist/l/yokai/safe-command-bundle?style=flat-square)](https://packagist.org/packages/yokai/safe-command-bundle/stats)
+[![Latest Stable Version](https://img.shields.io/packagist/v/yokai/safe-command-bundle?style=flat-square)](https://packagist.org/packages/yokai/safe-command-bundle)
+[![Current Unstable Version](https://img.shields.io/packagist/v/yokai/safe-command-bundle?include_prereleases&style=flat-square)](https://packagist.org/packages/yokai/safe-command-bundle)
+[![Downloads Monthly](https://img.shields.io/packagist/dm/yokai/safe-command-bundle?style=flat-square)](https://packagist.org/packages/yokai/safe-command-bundle/stats)
+[![Total Downloads](https://img.shields.io/packagist/dt/yokai/safe-command-bundle?style=flat-square)](https://packagist.org/packages/yokai/safe-command-bundle/stats)
 
 
 Did you find yourself ashamed, running command in the wrong environment ?
@@ -16,33 +20,30 @@ This bundle want to help. Using configuration, define commands that you are not 
 That's it...
 
 
-Installation
-------------
+## Installation
 
 ### Add the bundle as dependency with Composer
 
 ``` bash
-$ php composer.phar require yokai/safe-command-bundle
+composer require yokai/safe-command-bundle
 ```
 
 ### Enable the bundle in the kernel
 
 ``` php
 <?php
-// app/AppKernel.php
+// config/bundles.php
 
-public function registerBundles()
-{
-    $bundles = [
-        // ...
-        new Yokai\SafeCommandBundle\YokaiSafeCommandBundle(),
-    ];
-}
+return [
+    // ...
+    Yokai\SafeCommandBundle\YokaiSafeCommandBundle::class => ['all' => true],
+];
 ```
 
 ### Configuration
 
 ```
+# config/packages/yokai_safe_command.yaml
 yokai_safe_command:
     enabled: true
     commands:
@@ -95,14 +96,12 @@ yokai_safe_command:
 ```
 
 
-MIT License
------------
+## License
 
-License can be found [here](https://github.com/yokai-php/safe-command-bundle/blob/master/LICENSE).
+This library is under MIT [LICENSE](LICENSE).
 
 
-Authors
--------
+## Authors
 
 The bundle was originally created by [Yann Eugoné](https://github.com/yann-eugone).
 

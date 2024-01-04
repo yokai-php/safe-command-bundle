@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yokai\SafeCommandBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -7,6 +9,6 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-class YokaiSafeCommandBundle extends Bundle
+final class YokaiSafeCommandBundle extends Bundle
 {
 }
