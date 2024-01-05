@@ -1,6 +1,6 @@
 # YokaiSafeCommandBundle
 
-[![Tests](https://img.shields.io/github/actions/workflow/status/yokai-php/safe-command-bundle/tests.yml?branch=main&style=flat-square&label=tests)](https://github.com/yokai-php/safe-command-bundle/actions)
+[![Tests](https://img.shields.io/github/actions/workflow/status/yokai-php/safe-command-bundle/tests.yml?branch=master&style=flat-square&label=tests)](https://github.com/yokai-php/safe-command-bundle/actions)
 [![Coverage](https://img.shields.io/codecov/c/github/yokai-php/safe-command-bundle?style=flat-square)](https://codecov.io/gh/yokai-php/safe-command-bundle)
 [![Contributors](https://img.shields.io/github/contributors/yokai-php/safe-command-bundle?style=flat-square)](https://github.com/yokai-php/safe-command-bundle/graphs/contributors)
 
