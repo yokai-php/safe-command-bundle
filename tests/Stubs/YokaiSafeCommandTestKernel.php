@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace Yokai\SafeCommandBundle\Tests\Stubs;
 
 use Psr\Log\NullLogger;
-use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\HttpKernel\Kernel;
 
 final class YokaiSafeCommandTestKernel extends Kernel
 {
+    use MicroKernelTrait;
+
     public function registerBundles(): array
     {
         return [
@@ -19,14 +22,17 @@ final class YokaiSafeCommandTestKernel extends Kernel
         ];
     }
 
+    protected function configureContainer(ContainerConfigurator $container): void
+    {
+        $container->extension('framework', [
+            'secret' => 'ThisIsNotSecret',
+            'test' => true,
+        ]);
+    }
+
     protected function build(ContainerBuilder $container): void
     {
         $container->set('logger', new NullLogger());
-    }
-
-    public function registerContainerConfiguration(LoaderInterface $loader): void
-    {
-        $loader->load(__DIR__ . '/config.yml');
     }
 
     public function getCacheDir(): string

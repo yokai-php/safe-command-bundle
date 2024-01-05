@@ -19,23 +19,46 @@ final class Configuration implements ConfigurationInterface
         $root = $tree->getRootNode();
 
         $root
-            ->canBeDisabled()
             ->addDefaultsIfNotSet()
             ->children()
-                ->arrayNode('commands')
-                    ->canBeDisabled()
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->append($this->createCommandsNode('config'))
-                        ->append($this->createCommandsNode('doctrine'))
-                        ->append($this->createCommandsNode('debug'))
-                        ->append($this->createCommandsNode('lint'))
-                        ->append($this->createCommandsNode('server'))
-                        ->append($this->createCommandsNode('translation'))
-                        ->append($this->createCommandsNode('misc'))
-                    ->end()
+                ->arrayNode('standard')
+                    ->defaultValue([
+                        'config:dump-reference',
+                        'doctrine:database:drop',
+                        'doctrine:mapping:convert',
+                        'doctrine:mapping:import',
+                        'doctrine:schema:drop',
+                        'doctrine:schema:validate',
+                        'debug:autowiring',
+                        'debug:config',
+                        'debug:container',
+                        'debug:dotenv',
+                        'debug:event-dispatcher',
+                        'debug:firewall',
+                        'debug:form',
+                        'debug:router',
+                        'debug:serializer',
+                        'debug:translation',
+                        'debug:twig',
+                        'debug:validator',
+                        'lint:container',
+                        'lint:twig',
+                        'lint:xliff',
+                        'lint:yaml',
+                        'server:dump',
+                        'server:log',
+                        'translation:extract',
+                        'translation:pull',
+                        'translation:push',
+                    ])
+                    ->useAttributeAsKey('name')
+                    ->prototype('scalar')->end()
                 ->end()
-                ->append($this->createEnvironmentsNode())
+                ->arrayNode('custom')
+                    ->defaultValue([])
+                    ->useAttributeAsKey('name')
+                    ->prototype('scalar')->end()
+                ->end()
             ->end()
         ;
 
