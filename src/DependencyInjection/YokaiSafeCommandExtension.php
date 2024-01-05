@@ -22,7 +22,7 @@ final class YokaiSafeCommandExtension extends Extension
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__ . '/../../config'));
         $loader->load('services.xml');
 
-        $commands = array_unique([
+        $commands = \array_unique([
             ...$config['standard'],
             ...$config['custom'],
         ]);

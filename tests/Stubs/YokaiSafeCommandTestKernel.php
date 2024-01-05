@@ -37,11 +37,11 @@ final class YokaiSafeCommandTestKernel extends Kernel
 
     public function getCacheDir(): string
     {
-        return sys_get_temp_dir() . '/' . Kernel::VERSION . '/cache/' . $this->environment;
+        return \sys_get_temp_dir() . '/' . Kernel::VERSION . '/cache/' . $this->environment;
     }
 
     public function getLogDir(): string
     {
-        return sys_get_temp_dir() . '/' . Kernel::VERSION . '/logs';
+        return \sys_get_temp_dir() . '/' . Kernel::VERSION . '/logs';
     }
 }
