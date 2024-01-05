@@ -45,9 +45,9 @@ return [
 
 ### Configuration
 
-The bundle comes with few some commands disabled by default (from Symfony's standards), but
+The bundle comes with some commands disabled by default (from Symfony's standards).
 
-you can override commands that came from the standard:
+That "standard" command list can be overridden:
 ```
 # config/packages/yokai_safe_command.yaml
 when@prod:
@@ -55,7 +55,13 @@ when@prod:
         standard: []
 ```
 
-you add your own commands:
+> [!NOTE]
+> "standard" disabled commands are viewable via the command:
+> ```
+> bin/console config:dump-reference yokai_safe_command
+> ```
+
+And you can also add your own commands to the list:
 ```
 # config/packages/yokai_safe_command.yaml
 when@prod:
@@ -66,10 +72,7 @@ when@prod:
 ```
 
 > [!NOTE]
-> "standard" disabled commands are viewable via the command:
-> ```
-> bin/console config:dump-reference yokai_safe_command
-> ```
+> `standard` and `custom` configs are merged together to create the final list of disabled commands.
 
 
 ## License
