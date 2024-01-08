@@ -27,7 +27,7 @@ final class CommandDisabledTest extends CommandTestCase
             self::assertDoesNotMatchRegularExpression(
                 '/' . $command . '/',
                 $out,
-                sprintf('Disabled command "%s" should not appear in commands listing.', $command)
+                \sprintf('Disabled command "%s" should not appear in commands listing.', $command)
             );
         }
     }
@@ -45,13 +45,13 @@ final class CommandDisabledTest extends CommandTestCase
         self::assertSame(
             ConsoleCommandEvent::RETURN_CODE_DISABLED,
             $exit,
-            sprintf('Running disabled command "%s" should return disabled return code.', $command)
+            \sprintf('Running disabled command "%s" should return disabled return code.', $command)
         );
 
         self::assertMatchesRegularExpression(
             '/This command has been disabled. Aborting.../',
             $output->fetch(),
-            sprintf('Disabled command "%s" should output message to tell it wont run.', $command)
+            \sprintf('Disabled command "%s" should output message to tell it wont run.', $command)
         );
     }
 

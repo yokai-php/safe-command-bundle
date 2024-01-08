@@ -50,6 +50,9 @@ return function (ECSConfig $ecsConfig): void {
     $ecsConfig->ruleWithConfiguration(FunctionDeclarationFixer::class, [
         'closure_fn_spacing' => 'none',
     ]);
-    $ecsConfig->rule(NativeFunctionInvocationFixer::class);
+    $ecsConfig->ruleWithConfiguration(NativeFunctionInvocationFixer::class, [
+        'scope' => 'namespaced',
+        'include' => ['@all'],
+    ]);
     $ecsConfig->rule(FinalClassFixer::class);
 };
