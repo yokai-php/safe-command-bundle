@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - "master"
+      - "tac"
 
 jobs:
   phpunit:
